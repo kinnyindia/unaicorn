@@ -1,0 +1,13 @@
+[unit]
+Description=gunicorn daemon
+Requires=gunicorn.socket
+After=network.target
+
+[service]
+User=ubuntu
+Group=www-data
+WorkingDirectory=/home/ubuntu/unaicorn/TitanicML
+ExecStart=/home/ubuntu/.local/bin/gunicorn --access-logfile - --workers 3 --bind unix:/home/ubuntu/unaicorn/TitanicML/TitanicML.sock TitanicML.wsgi:application
+
+[install]
+WantedBy=multi-user.target
